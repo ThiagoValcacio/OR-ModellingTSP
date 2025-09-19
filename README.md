@@ -4,62 +4,62 @@ Guia objetivo em **PowerShell**. Execute os blocos na ordem.
 
 ---
 
-1) Instalar Python 3.12 e criar o ambiente virtual
+## 1) Instalar Python 3.12 e criar o ambiente virtual
 
 ```powershell
 # Baixar instalador (marque "Add python.exe to PATH" na instalação)
 Start-Process "https://www.python.org/downloads/release/python-31210/"
 ```
 
-# Após instalar, crie o venv
+- Após instalar, crie o venv
 ```powershell
 py -3.12 -m venv .venv312
 ```
 
-# Ativar o venv (Windows)
+- Ativar o venv (Windows)
 ```powershell
 .\.venv312\Scripts\activate
 ```
 
-# (opcional) Confirmar versão
+- (opcional) Confirmar versão
 ```powershell
 python --version
 ```
 
 ---
 
-2) Microsoft Tools (se solicitado por pacotes que compilam C/C++)
+## 2) Microsoft Tools (se solicitado por pacotes que compilam C/C++)
 Instale os componentes:
 - MSVC v14.x (toolset v143 ou superior)
 - Windows 10/11 SDK
 - C++ CMake tools for Windows
 
-3) Instalar dependências do projeto
-# Com o venv (.venv312) ativado e no diretório do projeto:
+## 3) Instalar dependências do projeto
+Com o venv (.venv312) ativado e no diretório do projeto:
 ```powershell
 pip install -r requirements.txt
 ```
 
-4) Rodar a aplicação
+## 4) Rodar a aplicação
 ```powershell
 python modelo.py
 ```
 
 ---
 
-FAZER PROCEDIMENTO ABAIXO COM O SOLVER HIGHS CASO SEJA NECESSÁRIO
+# FAZER PROCEDIMENTO ABAIXO COM O SOLVER HIGHS CASO SEJA NECESSÁRIO
 
-1) Baixar e compilar o HiGHS (Buildar via Git) (gera DLL)
-# Pré-requisito: CMake instalado e no PATH
-# https://cmake.org/download/
+## 1) Baixar e compilar o HiGHS (Buildar via Git) (gera DLL)
+Pré-requisito: CMake instalado e no PATH
+https://cmake.org/download/
 
-# Clonar o repositório
+Clonar o repositório
 ```powershell
 git clone https://github.com/ERGO-Code/HiGHS.git
 cd HiGHS
 ```
 
-# Gerar build compartilhado (DLL) a partir da RAIZ do repositório
+Gerar build compartilhado (DLL) a partir da RAIZ do repositório
 ```powershell
 rmdir .\build-shared -Recurse -Force -ErrorAction SilentlyContinue
 
@@ -74,7 +74,7 @@ cmake --build build-shared --config Release --target highs
 
 A DLL normalmente fica em: .\HiGHS\build-shared\bin\Release\highs.dll
 
-2) Disponibilizar a DLL para o Python-MIP
+## 2) Disponibilizar a DLL para o Python-MIP
 
 ```powershell
 [Environment]::SetEnvironmentVariable(
