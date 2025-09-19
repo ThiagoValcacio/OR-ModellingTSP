@@ -9,15 +9,22 @@ Guia objetivo em **PowerShell**. Execute os blocos na ordem.
 ```powershell
 # Baixar instalador (marque "Add python.exe to PATH" na instalação)
 Start-Process "https://www.python.org/downloads/release/python-31210/"
+```
 
 # Após instalar, crie o venv
+```powershell
 py -3.12 -m venv .venv312
+```
 
 # Ativar o venv (Windows)
+```powershell
 .\.venv312\Scripts\activate
+```
 
 # (opcional) Confirmar versão
+```powershell
 python --version
+```
 
 ---
 
@@ -29,10 +36,14 @@ Instale os componentes:
 
 3) Instalar dependências do projeto
 # Com o venv (.venv312) ativado e no diretório do projeto:
+```powershell
 pip install -r requirements.txt
+```
 
 4) Rodar a aplicação
+```powershell
 python modelo.py
+```
 
 ---
 
@@ -43,10 +54,13 @@ FAZER PROCEDIMENTO ABAIXO COM O SOLVER HIGHS CASO SEJA NECESSÁRIO
 # https://cmake.org/download/
 
 # Clonar o repositório
+```powershell
 git clone https://github.com/ERGO-Code/HiGHS.git
 cd HiGHS
+```
 
 # Gerar build compartilhado (DLL) a partir da RAIZ do repositório
+```powershell
 rmdir .\build-shared -Recurse -Force -ErrorAction SilentlyContinue
 
 cmake -S . -B build-shared -G "Visual Studio 17 2022" -A x64 `
@@ -55,8 +69,8 @@ cmake -S . -B build-shared -G "Visual Studio 17 2022" -A x64 `
   -DHIGHS_BUILD_TESTS=OFF `
   -DHIGHS_BUILD_EXAMPLES=OFF
 
-```powershell
 cmake --build build-shared --config Release --target highs
+```
 
 A DLL normalmente fica em: .\HiGHS\build-shared\bin\Release\highs.dll
 
@@ -69,6 +83,7 @@ A DLL normalmente fica em: .\HiGHS\build-shared\bin\Release\highs.dll
   'User'
 )
 $env:PMIP_HIGHS_LIBRARY = 'C:\Users\thiago.assis\.vscode\HIGHS\HiGHS\build-shared\bin\Release\highs.dll'
+```
 
 Importante: o Python-MIP precisa de highs.dll (biblioteca dinâmica).
 Arquivo .lib não funciona para o carregamento via Python.
